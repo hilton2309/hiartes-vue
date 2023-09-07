@@ -41,7 +41,7 @@
           <td>{{ copia.sectors.sector }}</td>
           <td>{{ copia.comment }}</td>
           <td>
-            {{ copia.created_at }}
+            {{ formatDate(copia.created_at) }}
           </td>
         </tr>
       </tbody>
@@ -119,10 +119,10 @@ export default Vue.extend({
 
     formatDate(dateString: Date) {
       const date = new Date(dateString)
-      const day = date.getDate().toString().padStart(2, '0')
-      const month = (date.getMonth() + 1).toString().padStart(2, '0')
-      const year = date.getFullYear().toString()
-      return `${day}/${month}/${year}`
+      const offset = date.getTimezoneOffset()
+      const dateUtc = new Date(date.getTime() + offset * 60 * 1000)
+
+      return dateUtc.toLocaleDateString()
     },
 
     copiesall() {
