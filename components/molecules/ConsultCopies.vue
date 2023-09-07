@@ -54,8 +54,6 @@ import Vue from 'vue'
 import { copies } from '@/store'
 import { Copy, Sector } from '@/models'
 
-// Date(copia.created_at).toLocaleDateString('pt-BR')
-
 export default Vue.extend({
   data() {
     return {
@@ -71,14 +69,12 @@ export default Vue.extend({
 
   beforeUpdate() {
     this.valor()
-    // total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) exemplo de valor com '.' e ',' e R$
   },
 
   mounted() {
     this.copiesall()
     this.valor()
     this.dataInicial()
-    this.dataFinal()
   },
 
   methods: {
@@ -103,18 +99,15 @@ export default Vue.extend({
       const today = new Date()
       const year = today.getFullYear()
       const month = String(today.getMonth() + 1).padStart(2, '0')
-      const day = String(today.getDate()).padStart(2, '0')
-      const formattedDate = `${year}-${month}-${day}`
-      this.data2 = formattedDate
-    },
 
-    dataFinal() {
-      const today = new Date()
-      const year = today.getFullYear()
-      const month = String(today.getMonth() + 1).padStart(2, '0')
-      const day = String('1').padStart(2, '0')
-      const formattedDate = `${year}-${month}-${day}`
-      this.data1 = formattedDate
+      const dayInicial = String('1').padStart(2, '0')
+      const dayFinal = String(today.getDate()).padStart(2, '0')
+
+      const formattedDateInicial = `${year}-${month}-${dayInicial}`
+      const formattedDateFinal = `${year}-${month}-${dayFinal}`
+
+      this.data2 = formattedDateFinal
+      this.data1 = formattedDateInicial
     },
 
     formatDate(dateString: Date) {
@@ -133,35 +126,7 @@ export default Vue.extend({
     limpar() {
       this.texto = ''
       this.dataInicial()
-      this.dataFinal()
     },
-
-    // Exemplo --------------->
-    //
-    //   filteredItems() {
-    //     let items = [];
-    //     items = this.items.filter((item) => {
-    //       return (
-    //         item.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1 ||
-    //         item.email.toLowerCase().indexOf(this.search.toLowerCase()) > -1
-    //       );
-    //     });
-
-    //     items = items.filter((item) => {
-    //       if (this.selected == null) return item;
-    //       return item.isActive === this.selected;
-    //     });
-
-    //     return items;
-    //   },
-
-    // -----------------------------------------------------
-    // filteredItems() {
-    //   return this.items
-    //     .filter(item => item.category === this.selectedCategory)
-    //     .filter(item => item.price <= this.maxPrice)
-    //     .filter(item => item.rating >= this.minRating);
-    // }
 
     filteredItems(): Copy[] {
       return this.copias.filter(
@@ -175,12 +140,6 @@ export default Vue.extend({
     }
   }
 })
-
-// const data = new Date();
-// const dia = data.getDate().toString().padStart(2, '0');
-// const mes = (data.getMonth() + 1).toString().padStart(2, '0');
-// const ano = data.getFullYear().toString();
-// const dataFormatada = `${dia}-${mes}-${ano}`;
 </script>
 
 <style lang="scss" scoped>
@@ -225,8 +184,6 @@ button:hover {
   background: linear-gradient(to bottom, #e6e6e6, #ffffff);
   border: 1px solid #adadad;
   border-bottom: 3px solid #adadad;
-
-  //font-size: 13px;
 }
 
 .minha-tabela {
@@ -308,4 +265,33 @@ button:hover {
   margin: 0 10px;
   max-width: 150px;
 }
+
+// Exemplo --------------->
+//
+//   filteredItems() {
+//     let items = [];
+//     items = this.items.filter((item) => {
+//       return (
+//         item.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1 ||
+//         item.email.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+//       );
+//     });
+
+//     items = items.filter((item) => {
+//       if (this.selected == null) return item;
+//       return item.isActive === this.selected;
+//     });
+
+//     return items;
+//   },
+
+// -----------------------------------------------------
+// filteredItems() {
+//   return this.items
+//     .filter(item => item.category === this.selectedCategory)
+//     .filter(item => item.price <= this.maxPrice)
+//     .filter(item => item.rating >= this.minRating);
+// }
+
+// total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) exemplo de valor com '.' e ',' e R$
 </style>
