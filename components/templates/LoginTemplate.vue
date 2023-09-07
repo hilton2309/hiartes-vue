@@ -67,7 +67,7 @@ export default Vue.extend({
   align-content: center;
   border-radius: 10px;
   border: 2px solid rgb(168, 193, 253);
-  margin: 80px auto;
+  margin: 30px auto;
 
   @include screen('medium', 'small') {
     grid-template-columns: 1fr;

@@ -15,7 +15,7 @@ export default Vue.extend({})
 <style lang="scss" scoped>
 #margem {
   display: grid;
-  margin: 70px auto;
+  margin: 60px auto;
   padding: 15px;
   align-content: center;
   text-align: center;

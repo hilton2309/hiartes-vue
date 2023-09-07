@@ -8,7 +8,7 @@
 .container {
   margin: 0px auto;
   max-width: 1070px;
-  min-height: 400px;
+  min-height: 550px;
 
   @include screen('small') {
     width: 90%;
