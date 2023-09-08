@@ -8,8 +8,13 @@
       <NuxtLink to="/about">Sobre</NuxtLink>
       <NuxtLink to="/login">Login</NuxtLink>
       <nuxtLink to="/private">Privado</nuxtLink>
-      <nuxtLink to="/copies">Copias</nuxtLink>
-      <nuxtLink to="/copiesConsultation">Consulta</nuxtLink>
+      <div class="dropdown">
+        <button class="dropbtn">Copias</button>
+        <div class="dropdown-content">
+          <nuxtLink to="/copies">Incluir</nuxtLink>
+          <nuxtLink to="/copiesConsultation">Consultar</nuxtLink>
+        </div>
+      </div>
       <nuxtLink to="/updateRegister">Usuário: {{ nome }}</nuxtLink>
     </div>
   </div>
@@ -75,7 +80,7 @@ export default Vue.extend({
 
   a {
     color: #fcba03;
-    margin: 12px;
+    margin: 2px 12px;
     transition: 0.5s;
   }
 
@@ -84,5 +89,56 @@ export default Vue.extend({
   }
 
   //cursor: pointer;
+
+  .dropbtn {
+    background-color: #222;
+    color: #fcba03;
+    padding: 16px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    transition: 0.5s;
+  }
+
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: #f1f1f1;
+    color: #fcba03;
+  }
+
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {
+    background-color: #222;
+    color: #fff;
+  }
+
 }
 </style>
