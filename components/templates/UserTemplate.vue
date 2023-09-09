@@ -1,7 +1,6 @@
 <template>
   <div id="marge">
     <h1>Consulta de Usuário</h1>
-
     <UserForm />
   </div>
 </template>

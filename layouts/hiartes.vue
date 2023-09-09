@@ -3,7 +3,7 @@
     <Header :nome="user.username" />
     <div id="marges"></div>
 
-    <Container>
+    <Container id="altura">
       <Nuxt />
     </Container>
     <Footer />
@@ -28,10 +28,4 @@ export default Vue.extend({
   width: 100%;
   height: 100px;
 }
-
-// .hiartes-layout {
-//   margin-top: 4.313rem;
-//   display: grid;
-//   grid-gap: 6.75rem;
-// }
 </style>
