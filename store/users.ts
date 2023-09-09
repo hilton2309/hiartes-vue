@@ -48,7 +48,6 @@ export default class Users extends VuexModule {
 
     @Action
     public async create(payload: CreatePayload) {
-        console.log(payload)
         await $axios.$post('/users', payload)
     }
 

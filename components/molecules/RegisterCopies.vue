@@ -21,7 +21,7 @@
       </div>
       <p>
         <span>Deseja retornar para página inicial?</span>
-        <NuxtLink to="/private">Retornar</NuxtLink>
+        <NuxtLink to="/">Retornar</NuxtLink>
       </p>
       <BaseButton text="Incluir" />
     </form>

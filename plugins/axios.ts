@@ -8,7 +8,7 @@ const axiosPlugin: Plugin = ({ app, store, redirect }) => {
             config.headers.Authorization = `bearer ${token}`
         }
 
-        // console.log(`CONFIG =>`, config)
+
     })
 
     app.$axios.onError((error) => {

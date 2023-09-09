@@ -25,9 +25,25 @@
         <div class="order-number">{{ user.id }}</div>
         <div>{{ user.name }}</div>
         <div>{{ user.email }}</div>
-        <div>{{ user.units.nome }}</div>
+
+        <div>
+          <select @change="unitIdUser($event, user.id, user.ativo)">
+            <option value="" selected>Unidade</option>
+            <option
+              v-for="unid in unidall"
+              :key="unid.id"
+              :value="unid.id"
+              :selected="unid.nome === user.units.nome"
+            >
+              {{ unid.nome }}
+            </option>
+          </select>
+        </div>
+
         <div class="situacao">
-          <select @change="updateUser($event, user.id, user.ativo)">
+          <select
+            @change="categoryUser($event, user.id, user.ativo, user.unitId)"
+          >
             <option
               v-for="(c, index) in categoria"
               :key="index"
@@ -43,7 +59,7 @@
         <div class="botaocheck">
           <Botao
             :checked="user.ativo"
-            @click="inativoUser(user.id, user.ativo)"
+            @click="inativoUser(user.id, user.ativo, user.unitId)"
           />
         </div>
       </div>
@@ -59,13 +75,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { users, ativo } from '@/store'
-import { User } from '@/models'
+import { users, ativo, units } from '@/store'
+import { Unit, User } from '@/models'
 
 export default Vue.extend({
   data() {
     return {
       usuarios: [] as User[],
+      unidall: [] as Unit[],
       categoria: ['admin', 'editor', 'normal'],
       total: 0,
       searchTerm: '',
@@ -78,6 +95,7 @@ export default Vue.extend({
   },
 
   mounted() {
+    this.userall()
     this.unidades()
     this.valor()
   },
@@ -93,10 +111,6 @@ export default Vue.extend({
       }, 0)
     },
 
-    // valor() {
-    //   this.total = this.filteredItems().reduce((acc, item) => acc + item.id, 0)
-    // },
-
     filteredItems(): User[] {
       return this.usuarios.filter(
         (item) =>
@@ -105,29 +119,55 @@ export default Vue.extend({
       )
     },
 
-    unidades() {
+    userall() {
       const data = Object.values(users.$all)
       this.usuarios = data
     },
+
+    unitall() {
+      const data = Object.values(units.$all)
+      this.unidall = data as Unit[]
+    },
+
     async usuario() {
       await users.index()
-      this.unidades()
+      this.userall()
     },
-    async inativoUser(id: number, valor: boolean) {
+
+    async unidades() {
+      await units.index()
+      this.unitall()
+    },
+
+    async inativoUser(id: number, valor: boolean, unit: number) {
       await ativo.update({
         id,
         ativo: !valor,
-        category: ''
+        category: '',
+        unitId: unit
       })
       this.usuario()
     },
-    async updateUser(event: any, id: number, situacao: any) {
+    async categoryUser(event: any, id: number, situacao: any, unit: number) {
       const option = event.target.value
 
       await ativo.update({
         category: option,
         ativo: situacao,
+        unitId: unit,
         id
+      })
+      this.usuario()
+    },
+
+    async unitIdUser(event: any, id: number, situacao: any) {
+      const option: number = event.target.value
+
+      await ativo.update({
+        id,
+        category: '',
+        ativo: situacao,
+        unitId: option
       })
       this.usuario()
     }

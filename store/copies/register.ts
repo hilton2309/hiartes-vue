@@ -46,9 +46,8 @@ export default class Copies extends VuexModule {
 
     @Action
     public async create(payload: CreatePayload) {
-        console.log('passo 1')
         await $axios.$post('/copy', payload)
-        console.log('passo 2')
+
     }
 
     // @Action
