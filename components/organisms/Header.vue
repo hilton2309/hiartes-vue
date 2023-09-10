@@ -62,6 +62,7 @@ export default Vue.extend({
   position: fixed;
   z-index: 999px;
   box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.5);
+  min-height: 10ch;
 }
 
 .nav #logo-url {
@@ -139,6 +140,5 @@ export default Vue.extend({
     background-color: #222;
     color: #fff;
   }
-
 }
 </style>
