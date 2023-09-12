@@ -13,6 +13,7 @@
         <div class="dropdown-content">
           <nuxtLink to="/copies">Incluir</nuxtLink>
           <nuxtLink to="/copiesConsultation">Consultar</nuxtLink>
+          <nuxtLink to="/copiesResumo">Resumo</nuxtLink>
         </div>
       </div>
       <nuxtLink to="/updateRegister">Usuário: {{ nome }}</nuxtLink>
