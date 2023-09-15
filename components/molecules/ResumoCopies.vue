@@ -8,9 +8,6 @@
         </option>
       </select>
       <input v-model="texto" type="text" placeholder="Mês" />
-      <img src="@/assets/img/Search.svg" alt="Buscar" />
-      <input v-model="data1" class="data" type="date" value="data1" />
-      <input v-model="data2" class="data" type="date" value="data2" />
       <button @click="limpar">Limpar</button>
     </div>
 
@@ -169,12 +166,13 @@ export default Vue.extend({
   border-bottom: solid #333;
   margin: 0 auto;
 
-  input {
+  input,
+  select {
     outline: none;
     background: color(dark, shade1);
     border-radius: 20px;
     min-height: 36px;
-    width: 300px;
+    width: 200px;
     color: color(white);
     padding: 12px;
   }
