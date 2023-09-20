@@ -40,6 +40,7 @@ export default Vue.extend({
         await sector.create({
           sector: this.setor
         })
+        this.setor = ''
         this.msg = 'Registro incluido com sucesso!'
         setTimeout(() => (this.msg = ''), 3000)
       } catch (error) {

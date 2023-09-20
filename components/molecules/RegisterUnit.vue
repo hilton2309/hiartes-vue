@@ -33,11 +33,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { MessageBox } from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import { units } from '@/store'
 
 export default Vue.extend({
   data() {
     return {
+      mensagem: '',
       estados: [{ id: '', nome: '', sigla: '' }],
       cidades: [{ id: '', nome: '' }],
       valor: { ...units.$all },
@@ -65,6 +68,17 @@ export default Vue.extend({
   },
 
   methods: {
+
+    showMessage() {
+      MessageBox.alert(this.mensagem, 'Aviso', {
+        confirmButtonText: 'OK',
+        type: 'info',
+        callback: () => {
+          // código a ser executado após o usuário clicar no botão de confirmação
+        }
+      })
+    },
+
     async onSubmit() {
       try {
         await units.create({
@@ -72,12 +86,19 @@ export default Vue.extend({
           cidade: this.unit.cidade,
           uf: this.unit.uf
         })
+        this.unit.nome = ''
+        this.unit.cidade = ''
+        this.unit.uf = ''
 
-        this.msg = 'Registro incluído com sucesso!'
-        setTimeout(() => (this.msg = ''), 3000)
+        this.mensagem = 'Registro incluído com sucesso!'
+        this.showMessage()
+
+        // this.msg = 'Registro incluído com sucesso!'
+        // setTimeout(() => (this.msg = ''), 3000)
+
       } catch (error) {
-        this.msg = 'Registro não incluído.'
-        setTimeout(() => (this.msg = ''), 3000)
+        this.mensagem = 'Falha ao tentar incluir Registro!'
+        this.showMessage()
       }
     },
 
