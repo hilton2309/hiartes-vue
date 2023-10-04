@@ -105,9 +105,6 @@ export default Vue.extend({
     position: relative;
     display: inline-block;
     transition: 0.5s;
-    a {
-      padding: 2px;
-    }
   }
 
   /* Dropdown Content (Hidden by Default) */

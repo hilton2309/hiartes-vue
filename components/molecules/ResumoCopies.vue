@@ -1,13 +1,17 @@
 <template>
   <div>
     <div class="search">
-      <select>
-        <option>mês</option>
-        <option v-for="(mes, index) in meses" :key="index" value="index">
+      <select v-model="mesAtual">
+        <option
+          v-for="(mes, index) in meses"
+          :key="index"
+          :value="index"
+          :selected="index === mesAtual"
+        >
           {{ mes }}
         </option>
       </select>
-      <input v-model="texto" type="text" placeholder="Mês" />
+      <input v-model="texto" type="text" placeholder="Ano" />
       <button @click="limpar">Limpar</button>
     </div>
 
@@ -74,9 +78,10 @@ export default Vue.extend({
         'novembro',
         'dezembro'
       ],
+      mesAtual: new Date().getMonth(),
       setor: [] as Sector[],
       copias: [] as Copy[],
-      texto: '',
+      texto: new Date().getFullYear().toString(),
       total: 0,
       total2: 0,
       data1: '',
@@ -116,7 +121,6 @@ export default Vue.extend({
       const today = new Date()
       const year = today.getFullYear()
       const month = String(today.getMonth() + 1).padStart(2, '0')
-
       const dayInicial = String('1').padStart(2, '0')
       const dayFinal = String(today.getDate()).padStart(2, '0')
 
@@ -141,20 +145,34 @@ export default Vue.extend({
     },
 
     limpar() {
-      this.texto = ''
-      this.dataInicial()
+      this.texto = new Date().getFullYear().toString()
+      this.mesAtual = new Date().getMonth()
     },
 
     filteredItems(): Copy[] {
-      return this.copias.filter(
-        (item) =>
-          item.sectors.sector
-            .toLowerCase()
-            .includes(this.texto.toLowerCase()) &&
-          item.created_at.toString().slice(0, 10) >= this.data1 &&
-          item.created_at.toString().slice(0, 10) <= this.data2
-      )
+      return this.copias.filter((item) => {
+        const created_at = new Date(item.created_at)
+        return (
+          created_at.getFullYear().toString() === this.texto.toString() &&
+          created_at.getMonth() === this.mesAtual
+        )
+      })
     }
+
+    // filteredItems(): Copy[] {
+    //   return this.copias.filter(
+    //     (item) =>
+    //       item.created_at
+    //         .getFullYear()
+    //         .toString()
+    //         .toLowerCase()
+    //         .includes(this.texto.toLowerCase()) &&
+    //       item.created_at
+    //         .getMonth()
+    //         .toString()
+    //         .includes(this.mesAtual.toString())
+    //   )
+    // }
   }
 })
 </script>
