@@ -151,28 +151,13 @@ export default Vue.extend({
 
     filteredItems(): Copy[] {
       return this.copias.filter((item) => {
-        const created_at = new Date(item.created_at)
+        const createdAt = new Date(item.created_at)
         return (
-          created_at.getFullYear().toString() === this.texto.toString() &&
-          created_at.getMonth() === this.mesAtual
+          createdAt.getFullYear().toString() === this.texto.toString() &&
+          createdAt.getMonth() === this.mesAtual
         )
       })
     }
-
-    // filteredItems(): Copy[] {
-    //   return this.copias.filter(
-    //     (item) =>
-    //       item.created_at
-    //         .getFullYear()
-    //         .toString()
-    //         .toLowerCase()
-    //         .includes(this.texto.toLowerCase()) &&
-    //       item.created_at
-    //         .getMonth()
-    //         .toString()
-    //         .includes(this.mesAtual.toString())
-    //   )
-    // }
   }
 })
 </script>
