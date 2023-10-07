@@ -58,6 +58,6 @@ export default {
   build: {},
 
   axios: {
-    baseURL: 'https://hiartes-adfd83d9c227.herokuapp.com:3333' // 'http://127.0.0.1:3333'
+    baseURL: 'https://hiartes-adfd83d9c227.herokuapp.com' // 'http://127.0.0.1:3333'
   }
 }
