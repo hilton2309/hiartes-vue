@@ -10,7 +10,7 @@ import { copies, sector } from '@/store'
 
 export default Vue.extend({
   layout: 'hiartes',
-  // middleware: 'auth',
+  middleware: 'auth',
 
   async asyncData({ redirect }) {
     try {

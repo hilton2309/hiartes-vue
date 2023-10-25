@@ -9,8 +9,8 @@ import Vue from 'vue'
 // import { users } from '@/store'
 
 export default Vue.extend({
-  layout: 'hiartes'
-  // middleware: 'auth',
+  layout: 'hiartes',
+  middleware: 'auth',
 
   // async asyncData({ redirect }) {
   //   try {
